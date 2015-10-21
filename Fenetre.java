@@ -1,6 +1,7 @@
 import java.awt.GridLayout;
-import java.util.Vector;
+import java.util.List;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,29 +23,24 @@ public class Fenetre extends JFrame {
 	private JButton buttonShowPrice; private JButton buttonAddPanier;
 	private JLabel labelCatalogue;
 	private Panier panier;
-	private Catalogue catalogue;
 	private JList<Produit> listProduit;
 	private JTabbedPane ongletPanier;
 
-	public Fenetre(Panier panier, Catalogue catalogue) {
+	public Fenetre(Panier panier) {
 		
 		super("E-commerce");
 		this.panier = panier;
-		this.catalogue = catalogue;
 		container1 = new JPanel(); 
 		container11 = new JPanel(); 
 		container111 = new JPanel();
 		container112 = new JPanel();
 		container12 = new JPanel(); 
 
+		listProduit = new JList<Produit>();
+
 		buttonShowPrice = new JButton("Commander le panier"); 
 		buttonAddPanier = new JButton("Ajouter au panier");
 		setLabelCatalogue(new JLabel("Catalogue")); 
-		
-		// transforme la liste des produits du catalogue en une JLIST.
-		Vector<Produit> list = new Vector<Produit>();
-		for (Produit produit : this.catalogue.getListProduit()) {list.add(produit);}
-		listProduit = new JList<Produit>(list); 
 		
 		ongletPanier = new JTabbedPane();
 		
@@ -53,7 +49,7 @@ public class Fenetre extends JFrame {
 
 	public void initFrame()
 	{
-	    //this.setSize(800, 500);
+	    this.setSize(800, 500);
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -80,6 +76,16 @@ public class Fenetre extends JFrame {
 	    this.pack();
 	    this.setVisible(true);	    
 	    
+	}
+	
+	public void initCatalogue(List<Produit> produits) {
+		
+		DefaultListModel<Produit> tmp = new DefaultListModel<Produit>();
+		for (Produit produit : produits) {
+			tmp.addElement(produit);
+		}
+		listProduit.setModel(tmp);
+		this.pack();
 	}
 	
 	public void validerPanier()

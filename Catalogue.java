@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Catalogue extends ModelCatalogue implements CatalogueUser {
+public class Catalogue extends ModelCatalogue implements CatalogueUser, CatalogueAdmin {
 	
 	
 	public void addProduit(Produit p)
