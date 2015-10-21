@@ -27,7 +27,7 @@ public class Controler implements ListSelectionListener, ActionListener {
 			if((Produit) fenetre.getListCatalogue().getSelectedValue() != null)
 			{
 				model.getPanier().addProduit((Produit) fenetre.getListCatalogue().getSelectedValue());
-				fenetre.refreshOngletPanier();
+				fenetre.refreshOngletPanier(model.getPanier());
 				
 				// mettre à jour la fenetre = enlever les références du panier de la fenetre.
 			}
@@ -35,8 +35,19 @@ public class Controler implements ListSelectionListener, ActionListener {
 		
 		if (e.getSource() == fenetre.getbuttonShowPrice())
 		{
-			model.getPanier().pricePanier();
-			fenetre.validerPanier();
+			fenetre.validerPanier(model.getPanier().pricePanier());
+		}
+		
+
+		if (e.getSource() == fenetre.getButtonDeletePanier())
+		{
+			if((Produit) fenetre.getListCatalogue().getSelectedValue() != null)
+			{
+				model.getPanier().deleteProduit(((Produit) fenetre.getListCatalogue().getSelectedValue()));
+				fenetre.refreshOngletPanier(model.getPanier());
+				
+				// mettre à jour la fenetre = enlever les références du panier de la fenetre.
+			}
 		}
 		
 

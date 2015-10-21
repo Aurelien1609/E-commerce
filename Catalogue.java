@@ -1,7 +1,21 @@
 import java.util.ArrayList;
 
-public class Catalogue extends ModelCatalogue implements CatalogueUser, CatalogueAdmin {
+public class Catalogue implements CatalogueUser, CatalogueAdmin {
 	
+	private ArrayList<Produit> listProduit;
+	
+	public Catalogue() {
+		
+		this.listProduit = new ArrayList<Produit>();
+	}
+
+	public ArrayList<Produit> getListProduit() {
+		return listProduit;
+	}
+
+	public void setListProduit(ArrayList<Produit> listProduit) {
+		this.listProduit = listProduit;
+	}
 	
 	public void addProduit(Produit p)
 	{

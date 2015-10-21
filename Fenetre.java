@@ -1,4 +1,8 @@
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -6,8 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 
 public class Fenetre extends JFrame {
 	
@@ -18,28 +24,30 @@ public class Fenetre extends JFrame {
 	private JPanel container111;
 	private JPanel container112;
 	private JPanel container12;
+	private JPanel container13;
 
-
-	private JButton buttonShowPrice; private JButton buttonAddPanier;
+	private JButton buttonShowPrice; 
+	private JButton buttonAddPanier;
+	private JButton buttonDeletePanier;
 	private JLabel labelCatalogue;
-	private Panier panier;
 	private JList<Produit> listProduit;
 	private JTabbedPane ongletPanier;
 
 	public Fenetre(Panier panier) {
 		
 		super("E-commerce");
-		this.panier = panier;
 		container1 = new JPanel(); 
 		container11 = new JPanel(); 
 		container111 = new JPanel();
 		container112 = new JPanel();
 		container12 = new JPanel(); 
+		container13 = new JPanel();
 
 		listProduit = new JList<Produit>();
 
 		buttonShowPrice = new JButton("Commander le panier"); 
 		buttonAddPanier = new JButton("Ajouter au panier");
+		buttonDeletePanier = new JButton("Supprimer du panier");
 		setLabelCatalogue(new JLabel("Catalogue")); 
 		
 		ongletPanier = new JTabbedPane();
@@ -70,7 +78,10 @@ public class Fenetre extends JFrame {
 		container12.setLayout(new BoxLayout(container12, 1));
 		container12.add(labelCatalogue);
 		container12.add(listProduit);
-		container12.add(buttonAddPanier);
+		container13.setLayout(new FlowLayout());
+		container13.add(buttonAddPanier);
+		container13.add(buttonDeletePanier);
+		container12.add(container13);
 
 		this.setContentPane(container1);
 	    this.pack();
@@ -88,28 +99,37 @@ public class Fenetre extends JFrame {
 		this.pack();
 	}
 	
-	public void validerPanier()
+	public void validerPanier(double prixPanier)
 	{
-		this.buttonAddPanier.setEnabled(false);		
-//		this.container1.add(new JLabel("Le prix totale du panier sera de : " + String.valueOf(panier.pricePanier()) + " euros"));
-		
+		JOptionPane.showMessageDialog(this, "Le prix de votre panier sera de : " + prixPanier + " euros.");	
 	}
 	
-	public void refreshOngletPanier()
+	public void refreshOngletPanier(Panier panier)
 	{
 		int size = panier.getListProduit().size();
 		container111.removeAll();
 		container111.setLayout(new GridLayout(size, 3));
 		for (int i = 0; i < size; i++) 
 		{
-			// Création d'un objet composé de deux labels et d'un textField
-			ListObjectPanier tmp = new ListObjectPanier(panier.getListProduit().get(i).getType(), 
-														panier.getQuantiteProduit().get(i), 
-														panier.getListProduit().get(i).getPrice() * panier.getQuantiteProduit().get(i));
 			
-			
-			// Ajouts des composants graphiques dans le container
-			container111.add(tmp.getLabel1()); container111.add(tmp.getTextField()); container111.add(tmp.getLabel2());
+			container111.add(new JLabel(panier.getListProduit().get(i).getType()));
+			JTextField jtf = new JTextField(String.valueOf(panier.getQuantiteProduit().get(i)));
+//			jtf.addActionListener(new ActionListener() {
+//				
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					modifQuantiteProduit(panier.getListProduit().get(i), Integer.valueOf(jtf.getText()));
+//					
+//				}
+//
+//				private void modifQuantiteProduit(Produit produit, Integer valueOf) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//			});
+			container111.add(jtf);
+			container111.add(new JLabel(String.valueOf(panier.getListProduit().get(i).getPrice() * panier.getQuantiteProduit().get(i))));
+
 		}
 		
 		this.pack();
@@ -145,6 +165,14 @@ public class Fenetre extends JFrame {
 
 	public void setLabelCatalogue(JLabel labelCatalogue) {
 		this.labelCatalogue = labelCatalogue;
+	}
+
+	public JButton getButtonDeletePanier() {
+		return buttonDeletePanier;
+	}
+
+	public void setButtonDeletePanier(JButton buttonDeletePanier) {
+		this.buttonDeletePanier = buttonDeletePanier;
 	}
 
 }
