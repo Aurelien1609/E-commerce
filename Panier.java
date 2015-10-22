@@ -4,11 +4,13 @@ public class Panier {
 	
 	private ArrayList<Integer> quantiteProduit;
 	private ArrayList<Produit> listProduit;
+	private EtatPanier etat;
 	
 	public Panier() {
 		
 		this.quantiteProduit = new ArrayList<Integer>();
 		this.listProduit = new ArrayList<Produit>();
+		this.setEtat(new EtatPanierLibre(this));
 	}
 
 	public ArrayList<Produit> getListProduit() {
@@ -32,37 +34,39 @@ public class Panier {
 	
 	public Boolean addProduit(Produit produit)
 	{
-		int i = 0;
-		while (i < listProduit.size()) {
-			
-			if (listProduit.get(i) == produit)
-			{
-				quantiteProduit.set(i, quantiteProduit.get(i) + 1);
-				return true;
-			}	
-			i += 1;
-		}
-			
-		listProduit.add(produit);
-		quantiteProduit.add(1);
-		return true;
+		return etat.addProduit(produit);
+//		int i = 0;
+//		while (i < listProduit.size()) {
+//			
+//			if (listProduit.get(i) == produit)
+//			{
+//				quantiteProduit.set(i, quantiteProduit.get(i) + 1);
+//				return true;
+//			}	
+//			i += 1;
+//		}
+//			
+//		listProduit.add(produit);
+//		quantiteProduit.add(1);
+//		return true;
 	}
 	
 	public Boolean deleteProduit(Produit produit)
 	{
-		int i = 0;
-		while (i < listProduit.size()) {
-			
-			if (listProduit.get(i) == produit)
-			{
-				listProduit.remove(i);
-				quantiteProduit.remove(i);
-				return true;
-			}	
-			i += 1;
-		}
-		
-		return false;
+		return etat.deleteProduit(produit);
+//		int i = 0;
+//		while (i < listProduit.size()) {
+//			
+//			if (listProduit.get(i) == produit)
+//			{
+//				listProduit.remove(i);
+//				quantiteProduit.remove(i);
+//				return true;
+//			}	
+//			i += 1;
+//		}
+//		
+//		return false;
 	}
 	
 	public Boolean modifQuantiteProduit(Produit produit, Integer quantite)
@@ -91,10 +95,13 @@ public class Panier {
 		return res;
 	}
 
-	
-	
-	
+	public EtatPanier getEtat() {
+		return etat;
+	}
 
+	public void setEtat(EtatPanier etat) {
+		this.etat = etat;
+	}
 
 
 }

@@ -23,13 +23,17 @@ public class Fenetre extends JFrame {
 	private JPanel container11;
 	private JPanel container111;
 	private JPanel container112;
+	private JPanel container113;
 	private JPanel container12;
 	private JPanel container13;
 
 	private JButton buttonShowPrice; 
 	private JButton buttonAddPanier;
 	private JButton buttonDeletePanier;
+	private JButton buttonValiderCommande;
 	private JLabel labelCatalogue;
+	private JLabel labelValidation;
+	private JLabel labelEtatValidation;
 	private JList<Produit> listProduit;
 	private JTabbedPane ongletPanier;
 
@@ -39,16 +43,21 @@ public class Fenetre extends JFrame {
 		container1 = new JPanel(); 
 		container11 = new JPanel(); 
 		container111 = new JPanel();
+		container113 = new JPanel();
 		container112 = new JPanel();
 		container12 = new JPanel(); 
 		container13 = new JPanel();
 
 		listProduit = new JList<Produit>();
 
-		buttonShowPrice = new JButton("Commander le panier"); 
+		buttonShowPrice = new JButton("Valider la commande"); 
 		buttonAddPanier = new JButton("Ajouter au panier");
 		buttonDeletePanier = new JButton("Supprimer du panier");
 		setLabelCatalogue(new JLabel("Catalogue")); 
+		labelValidation = new JLabel("Etat de la commande : ");
+		labelEtatValidation = new JLabel("Non Validé");
+
+
 		
 		ongletPanier = new JTabbedPane();
 		
@@ -73,6 +82,12 @@ public class Fenetre extends JFrame {
 		ongletPanier.addTab("Panier", container112);
 		container11.add(ongletPanier);
 		container11.add(buttonShowPrice);
+		container113.setLayout(new FlowLayout());
+		container113.add(labelValidation);
+		container113.add(labelEtatValidation);
+
+		container11.add(container113);
+
 		
 		// Création du container du catalogue
 		container12.setLayout(new BoxLayout(container12, 1));
@@ -99,9 +114,10 @@ public class Fenetre extends JFrame {
 		this.pack();
 	}
 	
-	public void validerPanier(double prixPanier)
+	public void validerPanier(Panier panier)
 	{
-		JOptionPane.showMessageDialog(this, "Le prix de votre panier sera de : " + prixPanier + " euros.");	
+		labelEtatValidation.setText(panier.getEtat().toString());
+		JOptionPane.showMessageDialog(this, "Le prix de votre panier sera de : " + panier.pricePanier() + " euros.");	
 	}
 	
 	public void refreshOngletPanier(Panier panier)
@@ -114,19 +130,6 @@ public class Fenetre extends JFrame {
 			
 			container111.add(new JLabel(panier.getListProduit().get(i).getType()));
 			JTextField jtf = new JTextField(String.valueOf(panier.getQuantiteProduit().get(i)));
-//			jtf.addActionListener(new ActionListener() {
-//				
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					modifQuantiteProduit(panier.getListProduit().get(i), Integer.valueOf(jtf.getText()));
-//					
-//				}
-//
-//				private void modifQuantiteProduit(Produit produit, Integer valueOf) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//			});
 			container111.add(jtf);
 			container111.add(new JLabel(String.valueOf(panier.getListProduit().get(i).getPrice() * panier.getQuantiteProduit().get(i))));
 
@@ -173,6 +176,14 @@ public class Fenetre extends JFrame {
 
 	public void setButtonDeletePanier(JButton buttonDeletePanier) {
 		this.buttonDeletePanier = buttonDeletePanier;
+	}
+
+	public JButton getButtonValiderCommande() {
+		return buttonValiderCommande;
+	}
+
+	public void setButtonValiderCommande(JButton buttonValiderCommande) {
+		this.buttonValiderCommande = buttonValiderCommande;
 	}
 
 }
