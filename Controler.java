@@ -22,14 +22,13 @@ public class Controler implements ListSelectionListener, ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getSource() == fenetre.getbuttonAddPanier())
+		Boolean listCatalogueNotNull = (Produit) fenetre.getListCatalogue().getSelectedValue() != null;
+		
+		if (e.getSource() == fenetre.getbuttonAddPanier() && listCatalogueNotNull)
 		{
-			if((Produit) fenetre.getListCatalogue().getSelectedValue() != null)
-			{
-				model.getPanier().addProduit((Produit) fenetre.getListCatalogue().getSelectedValue());
-				fenetre.refreshOngletPanier(model.getPanier());
-				
-			}
+			model.getPanier().addProduit((Produit) fenetre.getListCatalogue().getSelectedValue());
+			fenetre.refreshOngletPanier(model.getPanier());
+
 		}
 		
 		if (e.getSource() == fenetre.getbuttonShowPrice())
@@ -39,14 +38,10 @@ public class Controler implements ListSelectionListener, ActionListener {
 		}
 		
 
-		if (e.getSource() == fenetre.getButtonDeletePanier())
+		if (e.getSource() == fenetre.getButtonDeletePanier() && listCatalogueNotNull)
 		{
-			if((Produit) fenetre.getListCatalogue().getSelectedValue() != null)
-			{
-				model.getPanier().deleteProduit(((Produit) fenetre.getListCatalogue().getSelectedValue()));
-				fenetre.refreshOngletPanier(model.getPanier());
-				
-			}
+			model.getPanier().deleteProduit(((Produit) fenetre.getListCatalogue().getSelectedValue()));
+			fenetre.refreshOngletPanier(model.getPanier());
 		}
 		
 

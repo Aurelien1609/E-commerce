@@ -99,5 +99,13 @@ public class Panier {
 		this.preValider = preValider;
 	}
 
+	public void setQuantiteProduit(ArrayList<Integer> quantiteProduit) {
+		this.quantiteProduit = quantiteProduit;
+	}
+
+	public void setListProduit(ArrayList<Produit> listProduit) {
+		this.listProduit = listProduit;
+	}
+
 
 }

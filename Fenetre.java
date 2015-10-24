@@ -133,7 +133,23 @@ public class Fenetre extends JFrame {
 			container111.add(new JLabel(panier.getListProduit().get(i).getType()));
 			JTextField jtf = new JTextField(String.valueOf(panier.getQuantiteProduit().get(i)));
 			container111.add(jtf);
-			container111.add(new JLabel(String.valueOf(panier.getListProduit().get(i).getPrice() * panier.getQuantiteProduit().get(i))));
+			JLabel jlb = new JLabel(String.valueOf(panier.getListProduit().get(i).getPrice() * panier.getQuantiteProduit().get(i)));
+			container111.add(jlb);
+			
+			int index = i;
+			jtf.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					panier.getQuantiteProduit().set(index, Integer.parseInt(jtf.getText()));
+					jlb.setText(String.valueOf(panier.getListProduit().get(index).getPrice() * panier.getQuantiteProduit().get(index)));
+					
+					if (panier.getListProduit().get(index).getPrice() * panier.getQuantiteProduit().get(index) == 0.0)
+					{
+						panier.deleteProduit(panier.getListProduit().get(index));
+						refreshOngletPanier(panier);
+					}
+				}
+			});
 
 		}
 		
