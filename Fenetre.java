@@ -140,14 +140,19 @@ public class Fenetre extends JFrame {
 			jtf.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					panier.getQuantiteProduit().set(index, Integer.parseInt(jtf.getText()));
-					jlb.setText(String.valueOf(panier.getListProduit().get(index).getPrice() * panier.getQuantiteProduit().get(index)));
-					
-					if (panier.getListProduit().get(index).getPrice() * panier.getQuantiteProduit().get(index) == 0.0)
+					if (panier.getEtat() == panier.getLibre() || panier.getEtat() == panier.getPreValider())
 					{
-						panier.deleteProduit(panier.getListProduit().get(index));
-						refreshOngletPanier(panier);
+						panier.getQuantiteProduit().set(index, Integer.parseInt(jtf.getText()));
+						jlb.setText(String.valueOf(panier.getListProduit().get(index).getPrice() * panier.getQuantiteProduit().get(index)));
+						
+						if (panier.getListProduit().get(index).getPrice() * panier.getQuantiteProduit().get(index) == 0.0)
+						{
+							panier.deleteProduit(panier.getListProduit().get(index));
+							refreshOngletPanier(panier);
+						}
 					}
+					
+					else {jtf.setText(String.valueOf(panier.getQuantiteProduit().get(index)));}
 				}
 			});
 

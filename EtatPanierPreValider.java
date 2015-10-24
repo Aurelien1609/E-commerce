@@ -7,13 +7,7 @@ public class EtatPanierPreValider extends EtatPanierLibre {
 	}
 
 	@Override
-	public Boolean deleteProduit(Produit produit) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Boolean modifQuantiteProduit(Produit produit, Integer quantite) {
+	public Boolean addProduit(Produit produit) {
 		// TODO Auto-generated method stub
 		return null;
 	}
