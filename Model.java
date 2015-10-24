@@ -1,7 +1,7 @@
 public class Model {
 
 	private Catalogue catalogue;
-	private Panier panier;
+	private PanierContext panier;
 	
 	public Model()
 	{
@@ -11,14 +11,14 @@ public class Model {
 		catalogue.addProduit(new Produit("Armoire de chambre IKEA", 130, "Montage très facile.", "Meuble"));
 		catalogue.addProduit(new Livre("Seigneur des anneaux : le retour du roi", 50, "Histoire épique.", "Livre", "Tolkien"));
 		catalogue.addProduit(new Produit("Imprimante HP", 40, "Bonne qualité.", "Imprimante"));		
-		this.panier = new Panier();
+		this.panier = new PanierContext(new Panier());
 	}
 
-	public Panier getPanier() {
+	public PanierContext getPanier() {
 		return panier;
 	}
 
-	public void setPanier(Panier panier) {
+	public void setPanier(PanierContext panier) {
 		this.panier = panier;
 	}
 

@@ -34,7 +34,7 @@ public class Controler implements ListSelectionListener, ActionListener {
 		
 		if (e.getSource() == fenetre.getbuttonShowPrice())
 		{
-			model.getPanier().setEtat(new EtatPanierValider(null));
+			model.getPanier().setEtat(model.getPanier().getValider());
 			fenetre.validerPanier(model.getPanier());
 		}
 		

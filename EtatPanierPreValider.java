@@ -1,10 +1,11 @@
 public class EtatPanierPreValider extends EtatPanier {
 
-	private Panier panier;
-	public EtatPanierPreValider(Panier panier)
-	{
-		this.panier = panier;
+
+	public EtatPanierPreValider(Panier panier) {
+		super(panier);
+		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public Boolean addProduit(Produit produit) {
 		// TODO Auto-generated method stub

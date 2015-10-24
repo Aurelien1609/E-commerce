@@ -114,14 +114,16 @@ public class Fenetre extends JFrame {
 		this.pack();
 	}
 	
-	public void validerPanier(Panier panier)
+	public void validerPanier(PanierContext panier)
 	{
 		labelEtatValidation.setText(panier.getEtat().toString());
-		JOptionPane.showMessageDialog(this, "Le prix de votre panier sera de : " + panier.pricePanier() + " euros.");	
+		JOptionPane.showMessageDialog(this, "Le prix de votre panier sera de : " + panier.pricePanier() + " euros.");
+		this.pack();
 	}
 	
 	public void refreshOngletPanier(Panier panier)
 	{
+
 		int size = panier.getListProduit().size();
 		container111.removeAll();
 		container111.setLayout(new GridLayout(size, 3));
