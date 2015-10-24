@@ -4,11 +4,20 @@ public class Panier {
 	
 	private ArrayList<Integer> quantiteProduit;
 	private ArrayList<Produit> listProduit;
-	
+	private EtatPanier etat;
+	private EtatPanierLibre libre;
+	private EtatPanierValider valider;
+	private EtatPanierPreValider preValider;
+
+
 	public Panier() {
 		
 		this.quantiteProduit = new ArrayList<Integer>();
 		this.listProduit = new ArrayList<Produit>();
+		setLibre(new EtatPanierLibre(this));
+		setValider(new EtatPanierValider(this));
+		setPreValider(new EtatPanierPreValider(this));
+		this.etat = libre;
 	}
 
 	public ArrayList<Produit> getListProduit() {
@@ -32,51 +41,17 @@ public class Panier {
 	
 	public Boolean addProduit(Produit produit)
 	{
-		int i = 0;
-		while (i < listProduit.size()) {
-			
-			if (listProduit.get(i) == produit)
-			{
-				quantiteProduit.set(i, quantiteProduit.get(i) + 1);
-				return true;
-			}	
-			i += 1;
-		}
-			
-		listProduit.add(produit);
-		quantiteProduit.add(1);
-		return true;
+		return etat.addProduit(produit);
 	}
 	
 	public Boolean deleteProduit(Produit produit)
 	{
-		int i = 0;
-		while (i < listProduit.size()) {
-			
-			if (listProduit.get(i) == produit)
-			{
-				listProduit.remove(i);
-				quantiteProduit.remove(i);
-				return true;
-			}	
-			i += 1;
-		}
-		
-		return false;
+		return etat.deleteProduit(produit);
 	}
 	
 	public Boolean modifQuantiteProduit(Produit produit, Integer quantite)
 	{
-		for (int i = 0; i < listProduit.size(); i++) {
-			
-			if (listProduit.get(i) == produit)
-			{
-				quantiteProduit.set(i, quantite);
-				return true;
-			}	
-		}
-		
-		return false;
+		return etat.modifQuantiteProduit(produit, quantite);
 	}
 	
 	public String toString()
@@ -89,6 +64,39 @@ public class Panier {
 		}
 		
 		return res;
+	}
+	
+	
+	public EtatPanier getEtat() {
+		return etat;
+	}
+
+	public void setEtat(EtatPanier etat) {
+		this.etat = etat;
+	}
+
+	public EtatPanierLibre getLibre() {
+		return libre;
+	}
+
+	public void setLibre(EtatPanierLibre libre) {
+		this.libre = libre;
+	}
+
+	public EtatPanierValider getValider() {
+		return valider;
+	}
+
+	public void setValider(EtatPanierValider valider) {
+		this.valider = valider;
+	}
+
+	public EtatPanierPreValider getPreValider() {
+		return preValider;
+	}
+
+	public void setPreValider(EtatPanierPreValider preValider) {
+		this.preValider = preValider;
 	}
 
 

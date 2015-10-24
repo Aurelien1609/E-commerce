@@ -6,17 +6,51 @@ public class EtatPanierLibre extends EtatPanier {
 
 	@Override
 	public Boolean addProduit(Produit produit) {
-		return panier.addProduit(produit);
+		int i = 0;
+		while (i < panier.getListProduit().size()) {
+			
+			if (panier.getListProduit().get(i) == produit)
+			{
+				panier.getQuantiteProduit().set(i, panier.getQuantiteProduit().get(i) + 1);
+				return true;
+			}	
+			i += 1;
+		}
+			
+		panier.getListProduit().add(produit);
+		panier.getQuantiteProduit().add(1);
+		return true;
 	}
 
 	@Override
 	public Boolean deleteProduit(Produit produit) {
-		return panier.deleteProduit(produit);
+		int i = 0;
+		while (i < panier.getListProduit().size()) {
+			
+			if (panier.getListProduit().get(i) == produit)
+			{
+				panier.getListProduit().remove(i);
+				panier.getQuantiteProduit().remove(i);
+				return true;
+			}	
+			i += 1;
+		}
+		
+		return false;
 	}
 
 	@Override
 	public Boolean modifQuantiteProduit(Produit produit, Integer quantite) {
-		return panier.modifQuantiteProduit(produit, quantite);
+		for (int i = 0; i < panier.getListProduit().size(); i++) {
+					
+					if (panier.getListProduit().get(i) == produit)
+					{
+						panier.getQuantiteProduit().set(i, quantite);
+						return true;
+					}	
+				}
+				
+				return false;
 	}
 	
 	@Override
