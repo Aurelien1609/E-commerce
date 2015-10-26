@@ -3,8 +3,7 @@ public class Main {
 	public static void main(String [] args) 
 	{     
 		Model model = new Model();
-
-		Fenetre fenetre = new Fenetre(model.getPanier());
+		Fenetre fenetre = new Fenetre();
 		Controler controler = new Controler(fenetre, model);
 
 		fenetre.getButtonDeletePanier().addActionListener(controler);

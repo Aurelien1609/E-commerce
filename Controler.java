@@ -39,7 +39,6 @@ public class Controler implements ListSelectionListener, ActionListener {
 			
 			else {model.getPanier().setEtat(model.getPanier().getValider());}
 			
-//			model.getPanier().setEtat(model.getPanier().getValider());
 			fenetre.validerPanier(model.getPanier());
 		}
 		

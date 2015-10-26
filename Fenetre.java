@@ -3,6 +3,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -31,13 +32,17 @@ public class Fenetre extends JFrame {
 	private JButton buttonAddPanier;
 	private JButton buttonDeletePanier;
 	private JButton buttonValiderCommande;
+	
 	private JLabel labelCatalogue;
 	private JLabel labelValidation;
 	private JLabel labelEtatValidation;
+	
 	private JList<Produit> listProduit;
 	private JTabbedPane ongletPanier;
+	
+	private ArrayList<JTextField> listTextFieldPanier;
 
-	public Fenetre(Panier panier) {
+	public Fenetre() {
 		
 		super("E-commerce");
 		container1 = new JPanel(); 
@@ -56,8 +61,7 @@ public class Fenetre extends JFrame {
 		setLabelCatalogue(new JLabel("Catalogue")); 
 		labelValidation = new JLabel("Etat de la commande : ");
 		labelEtatValidation = new JLabel("Non Validé");
-
-
+		listTextFieldPanier = new ArrayList<JTextField>();
 		
 		ongletPanier = new JTabbedPane();
 		
@@ -207,6 +211,14 @@ public class Fenetre extends JFrame {
 
 	public void setButtonValiderCommande(JButton buttonValiderCommande) {
 		this.buttonValiderCommande = buttonValiderCommande;
+	}
+
+	public ArrayList<JTextField> getListTextFieldPanier() {
+		return listTextFieldPanier;
+	}
+
+	public void setListTextFieldPanier(ArrayList<JTextField> listTextFieldPanier) {
+		this.listTextFieldPanier = listTextFieldPanier;
 	}
 
 }
