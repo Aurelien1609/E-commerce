@@ -1,4 +1,4 @@
-public class EtatPanierPreValider extends EtatPanierLibre {
+public class EtatPanierPreValider extends EtatPanier {
 
 
 	public EtatPanierPreValider(Panier panier) {

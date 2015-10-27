@@ -6,11 +6,10 @@ public class Main {
 		Fenetre fenetre = new Fenetre();
 		Controler controler = new Controler(fenetre, model);
 
-		fenetre.getButtonDeletePanier().addActionListener(controler);
+		fenetre.getButtonDeletePanier().addActionListener(controler.deleteProduit());
 		fenetre.addWindowListener(controler.initList());
-		fenetre.getbuttonShowPrice().addActionListener(controler);
-		fenetre.getListCatalogue().addListSelectionListener(controler);
-		fenetre.getbuttonAddPanier().addActionListener(controler);
+		fenetre.getbuttonShowPrice().addActionListener(controler.pricePanier());
+		fenetre.getbuttonAddPanier().addActionListener(controler.addProduit());
 
 
 
