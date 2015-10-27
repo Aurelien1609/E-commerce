@@ -40,8 +40,6 @@ public class Fenetre extends JFrame {
 	private JList<Produit> listProduit;
 	private JTabbedPane ongletPanier;
 	
-	private ArrayList<JTextField> listTextFieldPanier;
-
 	public Fenetre() {
 		
 		super("E-commerce");
@@ -61,7 +59,6 @@ public class Fenetre extends JFrame {
 		setLabelCatalogue(new JLabel("Catalogue")); 
 		labelValidation = new JLabel("Etat de la commande : ");
 		labelEtatValidation = new JLabel("Non Validé");
-		listTextFieldPanier = new ArrayList<JTextField>();
 		
 		ongletPanier = new JTabbedPane();
 		
@@ -124,7 +121,7 @@ public class Fenetre extends JFrame {
 		JOptionPane.showMessageDialog(this, "Le prix de votre panier sera de : " + panier.pricePanier() + " euros.");
 		this.pack();
 	}
-	
+
 	public void refreshOngletPanier(Panier panier)
 	{
 
@@ -134,29 +131,28 @@ public class Fenetre extends JFrame {
 		for (int i = 0; i < size; i++) 
 		{
 			
-			container111.add(new JLabel(panier.getListProduit().get(i).getType()));
 			JTextField jtf = new JTextField(String.valueOf(panier.getQuantiteProduit().get(i)));
-			container111.add(jtf);
 			JLabel jlb = new JLabel(String.valueOf(panier.getListProduit().get(i).getPrice() * panier.getQuantiteProduit().get(i)));
+			
+			container111.add(new JLabel(panier.getListProduit().get(i).getType()));
+			container111.add(jtf);
 			container111.add(jlb);
 			
 			int index = i;
 			jtf.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (panier.getEtat() == panier.getLibre() || panier.getEtat() == panier.getPreValider())
-					{
-						panier.getQuantiteProduit().set(index, Integer.parseInt(jtf.getText()));
-						jlb.setText(String.valueOf(panier.getListProduit().get(index).getPrice() * panier.getQuantiteProduit().get(index)));
-						
-						if (panier.getListProduit().get(index).getPrice() * panier.getQuantiteProduit().get(index) == 0.0)
-						{
-							panier.deleteProduit(panier.getListProduit().get(index));
-							refreshOngletPanier(panier);
-						}
-					}
 					
-					else {jtf.setText(String.valueOf(panier.getQuantiteProduit().get(index)));}
+					panier.modifQuantiteProduit(panier.getListProduit().get(index), Integer.valueOf(jtf.getText()));
+					jlb.setText(String.valueOf(panier.getListProduit().get(index).getPrice() * panier.getQuantiteProduit().get(index)));
+					jtf.setText(String.valueOf(panier.getQuantiteProduit().get(index)));
+					
+					if (Integer.parseInt(jtf.getText()) == 0)
+					{
+						panier.deleteProduit(panier.getListProduit().get(index));
+						refreshOngletPanier(panier);
+					}
+				
 				}
 			});
 
@@ -164,7 +160,7 @@ public class Fenetre extends JFrame {
 		
 		this.pack();
 	}
-
+	
 	public JButton getbuttonShowPrice() {
 		return buttonShowPrice;
 	}
@@ -211,14 +207,6 @@ public class Fenetre extends JFrame {
 
 	public void setButtonValiderCommande(JButton buttonValiderCommande) {
 		this.buttonValiderCommande = buttonValiderCommande;
-	}
-
-	public ArrayList<JTextField> getListTextFieldPanier() {
-		return listTextFieldPanier;
-	}
-
-	public void setListTextFieldPanier(ArrayList<JTextField> listTextFieldPanier) {
-		this.listTextFieldPanier = listTextFieldPanier;
 	}
 
 }
