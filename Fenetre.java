@@ -3,6 +3,9 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -15,6 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class Fenetre extends JFrame {
 	
@@ -79,8 +84,9 @@ public class Fenetre extends JFrame {
 		// Création du container du panier		
 		container11.setLayout(new BoxLayout(container11, 1));
 		container111.setLayout(new GridLayout(1, 3));
+//		ongletPanier.add("+", new JPanel());
 		ongletPanier.addTab("Panier", container111);
-		ongletPanier.addTab("Panier", container112);
+		
 		container11.add(ongletPanier);
 		container11.add(buttonShowPrice);
 		container113.setLayout(new FlowLayout());
@@ -208,5 +214,15 @@ public class Fenetre extends JFrame {
 	public void setButtonValiderCommande(JButton buttonValiderCommande) {
 		this.buttonValiderCommande = buttonValiderCommande;
 	}
+
+	public JTabbedPane getOngletPanier() {
+		return ongletPanier;
+	}
+
+	public void setOngletPanier(JTabbedPane ongletPanier) {
+		this.ongletPanier = ongletPanier;
+	}
+	
+	
 
 }

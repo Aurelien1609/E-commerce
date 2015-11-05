@@ -1,7 +1,7 @@
 public class Model {
 
 	private Catalogue catalogue;
-	private Panier panier;
+	private User user;
 	
 	public Model()
 	{
@@ -11,15 +11,12 @@ public class Model {
 		catalogue.addProduit(new Produit("Armoire de chambre IKEA", 130, "Montage très facile.", "Meuble"));
 		catalogue.addProduit(new Livre("Seigneur des anneaux : le retour du roi", 50, "Histoire épique.", "Livre", "Tolkien"));
 		catalogue.addProduit(new Produit("Imprimante HP", 40, "Bonne qualité.", "Imprimante"));		
-		this.panier = new Panier();
+		
+		this.user = new User(new Panier());
 	}
 
 	public Panier getPanier() {
-		return panier;
-	}
-
-	public void setPanier(Panier panier) {
-		this.panier = panier;
+		return user.getPanierOn();
 	}
 
 	public Catalogue getCatalogue() {
@@ -28,5 +25,13 @@ public class Model {
 
 	public void setCatalogue(Catalogue catalogue) {
 		this.catalogue = catalogue;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

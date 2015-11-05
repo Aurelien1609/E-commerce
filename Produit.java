@@ -6,6 +6,7 @@ public class Produit {
 	private double price;
 	private String description;
 	private String type;
+	private int stock = 10;
 	
 	public Produit(String name, double price, String description, String type)
 	{
@@ -61,6 +62,14 @@ public class Produit {
 //				"Description du produit : " + this.getDescription() + System.getProperty("line.separator");
 		
 		return this.getName() +  " " + this.getPrice() + " euros"; 
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 }

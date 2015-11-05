@@ -8,6 +8,8 @@ public class Panier {
 	private EtatPanierLibre libre;
 	private EtatPanierValider valider;
 	private EtatPanierPreValider preValider;
+	private static int ID = 0;
+	private int IDPanier;
 
 
 	public Panier() {
@@ -18,6 +20,8 @@ public class Panier {
 		setValider(new EtatPanierValider(this));
 		setPreValider(new EtatPanierPreValider(this));
 		this.etat = libre;
+		this.IDPanier = ID;
+		ID += 1;
 	}
 
 	public ArrayList<Produit> getListProduit() {
@@ -41,7 +45,13 @@ public class Panier {
 	
 	public Boolean addProduit(Produit produit)
 	{
-		return etat.addProduit(produit);
+		try {
+			return etat.addProduit(produit);
+		} catch (ExceptionStock e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
 	
 	public Boolean deleteProduit(Produit produit)
@@ -107,5 +117,12 @@ public class Panier {
 		this.listProduit = listProduit;
 	}
 
+	public int getIDPanier() {
+		return IDPanier;
+	}
+
+	public void setIDPanier(int iDPanier) {
+		IDPanier = iDPanier;
+	}
 
 }

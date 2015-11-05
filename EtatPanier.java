@@ -6,14 +6,19 @@ public abstract class EtatPanier {
 		this.panier = panier;
 	}
 	
-	public Boolean addProduit(Produit produit) {
+	public Boolean addProduit(Produit produit) throws ExceptionStock {
 		int i = 0;
 		while (i < panier.getListProduit().size()) {
 			
 			if (panier.getListProduit().get(i) == produit)
 			{
-				panier.getQuantiteProduit().set(i, panier.getQuantiteProduit().get(i) + 1);
-				return true;
+				if (panier.getQuantiteProduit().get(i) < panier.getListProduit().get(i).getStock()) {
+					panier.getQuantiteProduit().set(i, panier.getQuantiteProduit().get(i) + 1);
+					return true;}
+				else 
+					throw  new ExceptionStock();
+
+				
 			}	
 			i += 1;
 		}

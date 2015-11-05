@@ -1,10 +1,15 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JPanel;
 
 public class Controler {
 
@@ -71,6 +76,23 @@ public class Controler {
 			}
 		};
 	}
+	
+//	public MouseAdapter addPanier() {
+//		return new MouseAdapter() {
+//			public void mouseClicked(MouseEvent e) {
+//				
+//				if (fenetre.getOngletPanier().getSelectedIndex() == 0) {
+//					JPanel container = new JPanel();
+//					fenetre.getOngletPanier().addTab ("Panier", container);
+//					fenetre.getOngletPanier().setSelectedIndex(fenetre.getOngletPanier().getComponentCount() - 1);
+//					model.getUser().getListPanier().add(new Panier());
+//					model.getUser().setPanierOn(model.getUser().getListPanier().get(fenetre.getOngletPanier().getSelectedIndex()));
+//		            fenetre.pack();
+//				}
+//				
+//			}
+//		};		
+//	}
 
 
 	

@@ -10,6 +10,7 @@ public class Main {
 		fenetre.addWindowListener(controler.initList());
 		fenetre.getbuttonShowPrice().addActionListener(controler.pricePanier());
 		fenetre.getbuttonAddPanier().addActionListener(controler.addProduit());
+//		fenetre.getOngletPanier().addMouseListener(controler.addPanier());
 
 
 
